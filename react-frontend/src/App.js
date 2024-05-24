@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import icon from './assets/icons/upload.svg'
+import menu from './assets/icons/menu.svg'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className='menu-btn'>
+          <img className='menu-icon' src={menu}/>
+          
+        
+        </div> 
+
+        <div className='center-container'>
+          <p className='text'>Hello! Upload a picture.</p>
+            <div className='upload-btn' style={{ '--clr': '#1e9bff' }}>
+              <span>Upload</span>
+              <img src={icon}/> 
+            </div>
+        </div>
+
+        
+          
+        
+
+      </div>
   );
 }
 
+
+
+
 export default App;
+
