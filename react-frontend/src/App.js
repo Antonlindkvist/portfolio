@@ -14,20 +14,22 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  function handleUploadClick(){
-    let text = document.getElementsByClassName('text')[0];
-    if(!file){
-      text.textContent = "Choose a file, dummy!";
-      text.classList.remove('text');
-      void text.offsetWidth; 
-      text.classList.add('text');
-      return;
-    }
-    
-    text.textContent = "Doing some AI stuff...";
+  function changeText(con, text){
+    text.textContent = con;
     text.classList.remove('text');
     void text.offsetWidth; 
     text.classList.add('text');
+    return;
+  }
+
+
+  function handleUploadClick(){
+    let text = document.getElementsByClassName('text')[0];
+    if(!file){
+      changeText("Upload a file dummy!", text)
+      return;
+    }
+    changeText("Doing some AI stuff...", text)
   }
 
 
