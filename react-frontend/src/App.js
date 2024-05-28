@@ -12,24 +12,55 @@ function App() {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+    if(isSidebarOpen){
+      changeText("Hello! Upload a picture.");
+    }else{
+      changeText("Check my socials.. :)");
+    }
+    
   };
 
-  function changeText(con, text){
-    text.textContent = con;
+  function changeText(message){
+    let text = document.getElementsByClassName('text')[0];
+    text.textContent = message;
     text.classList.remove('text');
     void text.offsetWidth; 
     text.classList.add('text');
-    return;
   }
 
 
   function handleUploadClick(){
-    let text = document.getElementsByClassName('text')[0];
     if(!file){
-      changeText("Upload a file dummy!", text)
+      changeText("Not a picture...");
       return;
     }
-    changeText("Doing some AI stuff...", text)
+    var input = document.getElementById("fileinput");
+    var fileExtension = file.name.split('.').pop().toLowerCase();
+    if(fileExtension !== 'png' && fileExtension !== 'jpg'){
+      changeText("Choose a valid file!");
+      input.value = '';
+    }else{
+      changeText("Doing some AI stuff...");
+      input.value = '';
+      backend_entry();
+    }
+  }
+
+  function backend_entry(){
+    
+    const data = new FormData();
+    data.append('img_file', file);
+    fetch("http://localhost:5000/upload",{method: 'POST', body: data}
+
+    ).then(response => {
+      return response.json();
+
+   }).then(response_data => {
+      console.log('Success:', response_data);
+
+   }).catch(error => {
+    console.error("Error:" + error);
+   })
   }
 
 
@@ -68,7 +99,7 @@ function App() {
       <div className='center-container'>
         <p className='text'>Hello! Upload a picture.</p>
 
-        <input type="file" className='file-input' style={{ '--clr': '#1e9bff' }} onChange={Handlefilechange}/>
+        <input id="fileinput" type="file" className='file-input' style={{ '--clr': '#1e9bff' }} onChange={Handlefilechange}/>
         <div className='upload-btn' style={{ '--clr': '#1e9bff' }} onClick={handleUploadClick}>
           <span>Upload</span>
           <img src={icon} alt="upload icon" /> 
@@ -77,16 +108,7 @@ function App() {
       
     </div>
   );
-
-
-
-
 }
-
-
-
-
-
 
 export default App;
 
