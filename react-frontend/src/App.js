@@ -4,6 +4,7 @@ import icon from './assets/icons/upload.svg';
 
 
 
+
 function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,6 +20,8 @@ function App() {
     }
     
   };
+
+  
 
   function changeText(message){
     let text = document.getElementsByClassName('text')[0];
@@ -47,7 +50,6 @@ function App() {
   }
 
   function backend_entry(){
-    
     const data = new FormData();
     data.append('img_file', file);
     fetch("http://localhost:5000/upload",{method: 'POST', body: data}
@@ -57,6 +59,8 @@ function App() {
 
    }).then(response_data => {
       console.log('Success:', response_data);
+      
+      changeText("It's a, " + response_data.message);
 
    }).catch(error => {
     console.error("Error:" + error);
