@@ -3,12 +3,12 @@ import './App.css';
 import icon from './assets/icons/upload.svg';
 
 
-
-
 function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [file, setFile] = useState(null);
+
+  var pretrained = true;
   
 
   const toggleSidebar = () => {
@@ -16,12 +16,10 @@ function App() {
     if(isSidebarOpen){
       changeText("Hello! Upload a picture.");
     }else{
-      changeText("Check my socials.. :)");
+      changeText("Check my profiles! :)");
     }
     
   };
-
-  
 
   function changeText(message){
     let text = document.getElementsByClassName('text')[0];
@@ -32,9 +30,14 @@ function App() {
   }
 
 
+
+
+
+
+
   function handleUploadClick(){
     if(!file){
-      changeText("Not a picture...");
+      changeText("The input is empty...");
       return;
     }
     var input = document.getElementById("fileinput");
@@ -52,6 +55,7 @@ function App() {
   function backend_entry(){
     const data = new FormData();
     data.append('img_file', file);
+    data.append('mode', pretrained.toString());
     fetch("http://localhost:5000/upload",{method: 'POST', body: data}
 
     ).then(response => {
@@ -59,13 +63,29 @@ function App() {
 
    }).then(response_data => {
       console.log('Success:', response_data);
-      
-      changeText("It's a, " + response_data.message);
+      changeText(random_phrase() + response_data.message + '.');
+      setFile(null);
 
    }).catch(error => {
     console.error("Error:" + error);
    })
   }
+
+  function random_phrase() {
+    const min = Math.ceil(0); 
+    const max = Math.floor(6); 
+    const num = Math.floor(Math.random() * (max - min + 1)) + min; 
+    console.log(num);
+    switch (num) {
+        case 1: return "Wow what a cool ";
+        case 2: return "I predict it is a ";
+        case 3: return "This is a nice ";
+        case 4: return "This is a awesome ";
+        case 5: return "Have you ever seen a ";
+        case 6: return "I know this is a ";
+        default: return "I think this is a ";
+    }
+}
 
 
   function Handlefilechange(event){

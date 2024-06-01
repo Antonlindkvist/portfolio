@@ -1,19 +1,21 @@
-import torch
-import pandas as pd
-import numpy as np
-import matplotlib as plt
 
 
-scaler = torch.tensor([2, 4])
 
+class_name = "loggerhead, loggerhead, "
+class_name.replace(',', '')
+space_index1 = class_name.find(' ')
+space_index2 = class_name.find(' ', space_index1 + 1)
 
-matrix = torch.tensor([[2, 4],
-                       [5, 1]])
+# Om det inte finns ett andra mellanslag, sätt space_index2 till längden av strängen
+if space_index2 == -1:
+    space_index2 = len(class_name)
 
+    # Kontrollera om de två första orden är identiska
+if class_name[:space_index1] == class_name[space_index1 + 1:space_index2]:
+    result = class_name[:space_index1]
+else:
+    result = class_name[:space_index2 + 1]
 
-tensor = torch.tensor([[[2, 5, 7],
-                        [3, 7, 0],
-                        [1, 3, 6]]])
-
-random_tensor = torch.rand(1, 3, 2)
-print(random_tensor)
+print(result)
+    
+    
