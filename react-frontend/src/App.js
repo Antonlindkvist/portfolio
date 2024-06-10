@@ -30,11 +30,6 @@ function App() {
   }
 
 
-
-
-
-
-
   function handleUploadClick(){
     if(!file){
       changeText("The input is empty...");
@@ -78,12 +73,12 @@ function App() {
     console.log(num);
     switch (num) {
         case 1: return "Wow what a cool ";
-        case 2: return "I predict it is a ";
-        case 3: return "This is a nice ";
+        case 2: return "Hear me out on this:  ";
+        case 3: return "What an amazing ";
         case 4: return "This is a awesome ";
-        case 5: return "Have you ever seen a ";
-        case 6: return "I know this is a ";
-        default: return "I think this is a ";
+        case 5: return "What a stunning ";
+        case 6: return "Listen up, it's a ";
+        default: return "i've got this a,  ";
     }
 }
 
@@ -121,7 +116,7 @@ function App() {
       </label>
 
       <div className='center-container'>
-        <p className='text'>Hello! Upload a picture.</p>
+        <p className='text'>Hello! I predict pictures...</p>
 
         <input id="fileinput" type="file" className='file-input' style={{ '--clr': '#1e9bff' }} onChange={Handlefilechange}/>
         <div className='upload-btn' style={{ '--clr': '#1e9bff' }} onClick={handleUploadClick}>

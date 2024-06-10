@@ -37,13 +37,14 @@ def upload():
         if image.mode != 'RGB':
             image = image.convert('RGB')
 
+        transformed_image = transform(image).unsqueeze(0)
+
         mode = request.form.get('mode')
         if mode == 'false':
             print("inte pretrained")
             pass #jump to trained
 
         else:
-            transformed_image = transform(image).unsqueeze(0)
             class_name = predict(transformed_image)
             result = reformat_(class_name)
             return jsonify({"message": result}), 200
