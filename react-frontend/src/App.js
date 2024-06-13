@@ -7,9 +7,21 @@ function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [file, setFile] = useState(null);
+  const [isChecked, setIsSwitchChecked] = useState(true);
 
   var pretrained = true;
   
+  const updateChecked = () => {
+    setIsSwitchChecked(!isChecked);
+    if(!isChecked) {
+      changeText("On: Pretrained ML model.");
+    }else {
+      changeText("Off: Trained ML model.");
+      pretrained = false;
+    }
+  };
+
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -70,7 +82,6 @@ function App() {
     const min = Math.ceil(0); 
     const max = Math.floor(6); 
     const num = Math.floor(Math.random() * (max - min + 1)) + min; 
-    console.log(num);
     switch (num) {
         case 1: return "Wow what a cool ";
         case 2: return "Hear me out on this:  ";
@@ -123,6 +134,12 @@ function App() {
           <span>Upload</span>
           <img src={icon} alt="upload icon" /> 
         </div>
+
+        <span className="switch" checked={isChecked} onChange={updateChecked}>
+          <input type="checkbox" id="switch_btn" style={{ '--clr': '#1e9bff' }}/>
+          <label htmlFor="switch_btn"></label>
+        </span>
+
       </div>
       
     </div>
